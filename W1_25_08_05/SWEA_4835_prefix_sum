@@ -1,0 +1,57 @@
+import sys
+sys.stdin = open("sample_input.txt", "r")
+
+
+T = int(input())
+for test_case in range(1, T + 1):
+
+    # N, M 받아오기
+    N, M = list(map(int, input().split()))
+
+    # 부분합을 구하는 경우의 수
+    # N - M +1
+    num_of_cases = N - M + 1
+
+    # 정수 리스트 받아오기
+    integer_lst = list(map(int, input().split()))
+
+
+    #####  ---- 구현 시작  ----  #####
+
+    # 우리의 리스트에 대해서
+    # [idx : idx + N-M+1]
+    # 개씩 짤라서 sum을 구하고
+    # 그 sum을 가 현재
+    # max_sum 보다 큰 경우 max_sum으로 갱신
+    # 현재의 min_sum 보다 작은 경우에는 min_sum으로 갱신한다.
+
+    ## 1. max_sum 초기값을 list의 첫 번째 요소 값으로 지정
+    ##    min_sum은 짱 크게   
+
+    min_sum = 10 ** 8          # 정수 <= 10000
+    max_sum = integer_lst[0]               
+
+    for idx in range(num_of_cases):
+        # 검사 대상을 잘라오자
+        test_lst = integer_lst[idx : idx + M]
+
+        # 구간합 구해보자
+        current_sum = sum(test_lst)
+
+        if current_sum > max_sum:
+            max_sum = current_sum
+
+        if current_sum < min_sum:
+            min_sum = current_sum
+
+        # 초기값 갱신을 위해 elif 로 구현하지 않음
+
+    result_to_print = max_sum - min_sum
+
+    print(f'#{test_case} {result_to_print}')
+
+
+
+
+
+

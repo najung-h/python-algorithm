@@ -1,0 +1,119 @@
+
+import sys
+sys.stdin = open("sample_input_4831.txt", "r")
+
+# N 종점
+# k : 최대 이동 거리
+# M : 충전기가 설치된 정류장 개수
+# output: 최소 몇 번의 충전?
+
+## 만약, 모든 정류장에 충전기가 설치되어 있다면,
+## 충전이 필요한 최소횟수는 
+## 나머지가 없이 똑 떨어질 때 N//K -1 , 나머지 있을 때 N//K 로 구할 수 있다.
+
+
+## 최대 충전 횟수는
+## 모든 정류장을 다 들리는 것.
+## M 으로 구할 수 있다.
+
+
+
+
+
+#### 풀이 1
+
+## 걔네를 디폴트로 해두고, 구간을 
+# 
+# GREEDY 탐색
+# 마지막 충전잠소를 NOW_POINT로 지정하고, 그 출발점에서 K만큼 이동했을 때
+# 충전기가 있나 확인한다.
+# 없으면 한 칸 후진 반복
+
+# 후진할 때마다
+#   있으면 거기를 새로운 NOW_POINT로 지정
+#   충전COUNT += 1
+#   없으면 한 칸 더 후진
+
+# 계속 후진하다가, 현재 칸이 NOW_POINT라면, 이동하지 못하는 것. 
+# 
+
+
+#### 풀이 2
+# 아니면, 이동 가능 구간을 LIST로 데리고 오고, 
+################################################## 미로찾기 문제처럼 해결해도 됨
+# 즉, LIST안에 충전 가능 지점이 하나라면, 거기로 이동
+# 두 개 이상이라면, 더 먼 지점으로 이동
+
+
+
+#### 우선 풀이 2번으로 가겠습니다.
+
+T = int(input())
+# 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
+for test_case in range(1, T + 1):
+    
+
+    K, N, M = list(map(int, input().split()))
+    M_lst = list(map(int, input().split()))
+    # print(M_lst)
+    # [1, 3, 5, 7, 9]
+
+    ### 출발
+    ### 최대 충전 횟수가 M이기 때문에, 
+    ### M의 range안에서 반복하겠습니다.
+    ### for 
+
+    ### 생각해보니 그냥 while이 편할 것 같아서
+    ### 그냥 while 하겠습니다.
+
+    now_point = 0 # 출발점
+    charging_count = 0   # 몇 번 충전했니
+    old_point = 0 # 잘못 충전했을 경우 되돌아가기 위하여 저장
+
+    while N - now_point > K :      # 종점 못 갔으면 가야지
+        #print(move_possible_lst)
+
+        if N - now_point <= K:
+            print(f'#{test_case} {charging_count -1}')
+            break
+
+
+        else:
+            move_possible_lst = list(range(now_point, now_point + K))
+
+            for i in move_possible_lst[::-1]:  # 멀리가야 좋으므로 역순으로 탐색하겠습니다. #가능하면 break 
+                charging_possible_lst = []
+                is_moving_possible = False
+                no_point = []
+
+                if (i in M_lst) and ( i not in no_point) : # 충전기가 있다면, 
+                    charging_count += 1
+                    now_point = i
+                    is_moving_possible = True
+
+                
+                elif len(charging_possible_lst) == 1:
+                    now_point = charging_possible_lst[0] 
+
+                print(now_point)
+
+            if is_moving_possible == False:
+                print(f'#{test_case} 0')
+                break 
+               
+            if charging_count > M :     # 충전소가 M인데 그 이상 충전했다면,
+                print('error')
+                break 
+
+
+    if N - now_point <= K:
+        print(f'#{test_case} {charging_count -1}')
+
+        
+
+
+
+
+
+
+
