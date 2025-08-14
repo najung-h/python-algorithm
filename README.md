@@ -84,9 +84,13 @@
 ## 📂 디렉토리 구조
 
 Studying_Python_Algorithm/
+
  ├── Daily_Study_In_SSAFY/        # SSAFY 알고리즘 수업 복습
+
  ├── Personal_Study_to_get_IM/    # 파이썬 IM 등급 대비 개인 공부
+
  ├── STUDY_miracle_coding/        # ''미라클 코딩'' 스터디 기록
+
  └── README.md
 
 
