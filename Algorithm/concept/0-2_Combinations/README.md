@@ -20,7 +20,9 @@
 
 구현해봅시다.
 
-반복문으로 구현하면 아래와 같습니다.
+## 반복문
+
+으로 구현하면 아래와 같습니다.
 
 ```python
 numbers = [1, 2, 3, 4]
@@ -54,7 +56,7 @@ for i in range(n):
 
 ---
 
-
+## 재귀
 
 자, 이번에는 한 번 재귀 방식으로 구현해봅니다.
 
@@ -123,9 +125,15 @@ print(all_combs)
 
 
 
+## itertools
+
 그렇지만, 웬만한 경우에서는 itertools를 이용해
 
 쉽사리 구현하면 되십니다.
+
+물론, 코딩테스트에서 itertools를 제한시켜놓을 수 있으니,
+
+직접 구현하는 def 버전도 외우시긴 해야합니다.
 
 ```python
 from itertools import combinations
@@ -139,3 +147,15 @@ print(list(combinations(arr, 3)))
 
 
 이상으로 조합의 내용은 마무리해볼게요.
+
+
+
+** 주의 사항을 추가로 안내드립니다.
+
+`itertools.permutations(iterable, r=None)`는 iterator를 반환합니다.
+
+이는 generator와 마찬가지로, 일회용품 객체입니다.
+
+즉, 한 번 순회가 끝나면 재사용이 불가합니다.
+
+때문에, 필요한 경우, list() 또는 tuple() 로 먼저 형변환한 이후에 여러 번 재사용을 하셔야 합니다.
