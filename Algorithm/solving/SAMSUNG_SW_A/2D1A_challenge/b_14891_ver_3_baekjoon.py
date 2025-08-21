@@ -1,5 +1,5 @@
-import sys
-sys.stdin = open('input_b_14891.txt', 'r')
+#import sys
+#sys.stdin = open('input_b_14891.txt', 'r')
 
 
 
@@ -143,35 +143,32 @@ def scoring(A,B,C,D):
 
 
 
-
-
-
-T = int(input())
-
-for tc in range(1, T+1):
-
-
-    A = deque(list(map(int, input())))
-    B = deque(list(map(int, input())))
-    C = deque(list(map(int, input())))
-    D = deque(list(map(int, input())))
-
-    K = int(input()) # 회전 횟수
-    K_lst = []
-    for _ in range(K):
-        K_lst.append(list(map(int, input().split())))
-
-    big_arr = [A,B,C,D]
-    #print(big_arr)
+# ------------- 메인 -----------------
 
 
 
 
-    big_arr = turn_final(K_lst)
-    #print(big_arr)
-    print(scoring(A,B,C,D))
+A = deque(list(map(int, input().strip())))
+B = deque(list(map(int, input().strip())))
+C = deque(list(map(int, input().strip())))
+D = deque(list(map(int, input().strip())))
 
-    #print(A, B, C, D)
+K = int(input().strip()) # 회전 횟수
+K_lst = []
+for _ in range(K):
+    K_lst.append(list(map(int, input().strip().split())))
+
+big_arr = [A,B,C,D]
+#print(big_arr)
+
+
+
+
+big_arr = turn_final(K_lst)
+#print(big_arr)
+print(scoring(A,B,C,D))
+
+#print(A, B, C, D)
 
 
 
