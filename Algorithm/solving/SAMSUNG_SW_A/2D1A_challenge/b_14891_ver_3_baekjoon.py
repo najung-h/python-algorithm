@@ -118,11 +118,17 @@ def scoring(A,B,C,D):
     점수를 print하기 위한
     함수입니다.
     
-        
+    
     '''
     score = 0
+    
+    ABCD_SCORE_LST = [1, 2, 4, 8]
 
-    if A[0] == 1 :
+    for idx, item in enumerate([A,B,C,D]):
+        if item[0] == 1: # 12시 방향이 s극 이라면
+            score += ABCD_SCORE_LST[idx]
+
+    '''if A[0] == 1 :
         score += 1
     
     if B[0] == 1:
@@ -132,7 +138,7 @@ def scoring(A,B,C,D):
         score += 4
     
     if D[0] == 1:
-        score += 8
+        score += 8'''
 
     return score
 
@@ -152,14 +158,13 @@ A = deque(list(map(int, input().strip())))
 B = deque(list(map(int, input().strip())))
 C = deque(list(map(int, input().strip())))
 D = deque(list(map(int, input().strip())))
-
-K = int(input().strip()) # 회전 횟수
-K_lst = []
-for _ in range(K):
-    K_lst.append(list(map(int, input().strip().split())))
-
 big_arr = [A,B,C,D]
 #print(big_arr)
+
+
+K = int(input().strip()) # 회전 횟수
+K_lst = [tuple(map(int, input().split())) for _ in range(K)]
+
 
 
 
@@ -170,6 +175,13 @@ print(scoring(A,B,C,D))
 
 #print(A, B, C, D)
 
+
+'''gpt의 코드리뷰
+1) 회전의 지시에 대해 나타내는 K_lst는 변경될 일이 없으니, tuple로 받는 것이 효율적
+
+2) 매직 넘버 상수화: LEFT_TOOTH, RIGHT_TOOTH = 6, 2 등으로 의미 드러내기
+
+'''
 
 
 
