@@ -3,8 +3,9 @@
 [![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)](https://www.python.org/)
 [![GitHub last commit](https://img.shields.io/github/last-commit/najung-h/Studying_Python_Algorithm?color=brightgreen&logo=github)
 
-이 저장소는 **파이썬 알고리즘 공부 과정**을 기록하기 위해 만들어졌습니다.  
-크게 세 가지 축으로 구성되어 있으며, 각 폴더는 해당 주제에 맞춘 학습 내용을 담고 있습니다.
+이 저장소는 파이썬 알고리즘 공부 과정을 기록하기 위해 만들어졌습니다.
+ 각 폴더는 학습 목적에 따라 정리되어 있으며, 
+알고리즘 개념, 문제 풀이, SSAFY 수업 정리, 스터디 활동 내용을 포함하고 있습니다.
 
 
 
@@ -12,18 +13,14 @@
 
 ## 📌 학습 구성
 
-### 1. **Personal_Study_to_get_IM**
-- **목표**: 파이썬 등급 테스트(IM 등급) 통과
+### 1. Algorithm
 
-- **내용**: 개인적으로 풀이한 문제와 개념 정리 등 기록
+- **목표**: 알고리즘 개념 학습 및 문제 풀이 기록
+- **내용**:
+  - `concept/` : 알고리즘 개념 정리 (`.md`, `.py`)
+  - `solving/` : 문제 풀이 코드 및 설명 (`.md`, `.py`)
 
-- **방식**:
-  
-  - SWEA, 백준, 프로그래머스의 문제 풀이
-  
-  - 파이썬 문법 및 알고리즘 기초 복습
-  
-    
+
 
 ---
 
@@ -85,13 +82,24 @@
 
 Studying_Python_Algorithm/
 
- ├── Daily_Study_In_SSAFY/        # SSAFY 알고리즘 수업 복습
+├── Algorithm/              # 알고리즘 개념 및 문제 풀이
 
- ├── Personal_Study_to_get_IM/    # 파이썬 IM 등급 대비 개인 공부
+│   ├── concept/            # 알고리즘 개념 정리
 
- ├── STUDY_miracle_coding/        # ''미라클 코딩'' 스터디 기록
+│   └── solving/            # 문제 풀이
 
- └── README.md
+│
+
+├── Daily_Study_In_SSAFY/   # SSAFY 알고리즘 수업 학습 정리
+
+│
+
+├── STUDY_miracle_coding/   # ‘미라클 코딩’ 스터디 기록
+
+│
+
+└── README.md
+
 
 
 
