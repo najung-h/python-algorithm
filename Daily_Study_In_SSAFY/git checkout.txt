@@ -1,0 +1,12 @@
+git checkout
+git switch
+단순한 브랜치 이동 시에는 switch가 권장되고 있음
+
+git reflog
+git switch --detach b5c4
+
+merge
+
+
+conflict가 나는 경우와
+안 나는 경우를 잘 이해하자 ^0^
