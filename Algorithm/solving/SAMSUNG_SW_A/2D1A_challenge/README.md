@@ -37,3 +37,7 @@ A형 대비
 - 신청방법 : 20일 퇴실전까지 mm 주세요!
 ```
 
+
+
+[![Solved.ac
+프로필](http://mazassumnida.wtf/api/v2/generate_badge?boj=junghyun_na321)](https://solved.ac/{junghyun_na321})
