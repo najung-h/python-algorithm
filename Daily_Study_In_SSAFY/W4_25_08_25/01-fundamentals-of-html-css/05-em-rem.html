@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* rem의 기준이 되는 최상위 요소(root)의 글자 크기를 10px로 설정합니다.
+    계산을 쉽게 하기 위함이며, 브라우저 기본값은 보통 16px입니다.
+  */
+    html {
+      font-size: 10px;
+    }
+
+    /* em의 기준이 될 부모 요소 */
+    .parent-for-em {
+      font-size: 20px;
+      border: 2px solid blue;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* em 단위 사용 */
+    .em-unit {
+      /* 부모(.parent-for-em)의 font-size인 20px을 기준으로 1.5배 크기를 가집니다.
+      계산: 20px * 1.5 = 30px
+    */
+      font-size: 1.5em;
+    }
+
+    /* rem 단위 사용 */
+    .rem-unit {
+      /* 최상위 요소(html)의 font-size인 10px을 기준으로 1.5배 크기를 가집니다.
+      계산: 10px * 1.5 = 15px
+    */
+      font-size: 1.5rem;
+      border: 2px solid red;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="parent-for-em">
+    부모 요소 (font-size: 20px)
+    <div class="em-unit">
+      em 단위 자식 (font-size: 1.5em ==> 30px)
+    </div>
+  </div>
+
+  <div class="rem-unit">
+    rem 단위 요소 (font-size: 1.5rem ==> 15px)
+  </div>
+
+</body>
+
+</html>
