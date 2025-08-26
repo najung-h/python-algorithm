@@ -90,16 +90,21 @@ Studying_Python_Algorithm/
 
 │
 
-├── Daily_Study_In_SSAFY/   # SSAFY 알고리즘 수업 학습 정리
+├── Daily_Study_In_SSAFY/   # SSAFY 관련 학습 정리
 
 │
 
-├── STUDY_miracle_coding/   # ‘미라클 코딩’ 스터디 기록
+├── STUDY/   #  스터디 기록
 
-│
+│   ├── miracle_coding/                        # 미라클 코딩 스터디
+
+│   ├── web_db_etc/                             # 한결님과의 스터디 정리
+
+│   └── 2D1A_challenge/                      # 25년 8월 진행한 2day 1algo challenge 기록
+
+│   └── 1D1Commit_challenge/            #  25년 9월 진행 구상중인 1일 1커밋 챌린지
 
 └── README.md
-
 
 
 
