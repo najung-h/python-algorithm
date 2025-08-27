@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 1500px;
+    }
+
+    .container {
+      position: relative;
+      height: 300px;
+      width: 300px;
+      border: 1px solid black;
+    }
+
+    .box {
+      height: 100px;
+      width: 100px;
+      border: 1px solid black;
+    }
+
+    .static {
+      position: static;
+      background-color: lightcoral;
+    }
+
+    .absolute {
+      position: absolute;
+      background-color: lightgreen;
+      top: 100px;
+      left: 100px;
+    }
+
+    .relative {
+      position: relative;
+      background-color: lightblue;
+      top: 75px;
+      left: 75px;
+    }
+
+    .fixed {
+      position: fixed;
+      background-color: gray;
+      top: 0;
+      right: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="box static">Static</div>
+    <div class="box absolute">Absolute</div>
+    <div class="box relative">Relative</div>
+    <div class="box fixed">Fixed</div>
+  </div>
+</body>
+
+</html>
+
+<!-- 근데, 여기 설명에서, html 코드가 static - absolute - relative 순서잖아. 
+ 그럼, 원래 relative 위치가 위에서 static 아래아래 있어야 하는데, 
+ 원래 위치에서 아래로 75px 이동해서 보인다는 게 말이 되나? 에 대한 GPT의 답
+ 
+ 순서대로라면:
+Static → 맨 위
+Absolute → 그 아래
+Relative → 그 아래
+이게 Normal Flow일 때의 기본 배치예요.
+ 
+ 그런데, 왜 Absolute 밑이 아니라 Relative 밑에서 보이나?
+-> Absolute 박스는 Normal Flow에서 빠져버린 상태라서, 실제 레이아웃 공간을 차지하지 않아요.
+따라서 Static → Relative → (그 자리에 Absolute가 겹쳐져 보이는) 이런 구조가 됩니다.
+즉:
+HTML 순서상으로 Relative는 Static 바로 다음에 배치
+Absolute는 Flow에서 빠졌으므로 Relative의 “자리 배치”에 간섭하지 않음
+따라서 Relative는 Static 밑에 원래 자리 잡고, 거기서부터 top: 75px, left: 75px만큼 이동해 보이는 것
+ 
+relative는 원래 위치를 기준으로 이동한다.
+absolute는 Flow에서 빠지므로 다른 요소의 배치에는 영향을 주지 않는다.
+그래서 Relative는 “원래 자리를 유지한 채 이동한 것처럼 보인다.”
+→ 따라서 “static → relative 순서”가 맞고, 설명도 일관성이 있어요.
+ -->

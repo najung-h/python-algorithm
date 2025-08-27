@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 전체 선택자 */
+    * {
+      color:rgba(32, 0, 0, 0.733);
+    }
+    /* 요소 선택자 */
+    h2 {
+      color:rgb(230, 11, 3)
+    }
+
+    h3,
+    h4 {
+      color : rgb(238, 152, 39)
+    }
+
+    /* class 선택자 */
+
+    /* id 선택자 */
+    #purple {
+      color: rgba(207, 204, 30, 0.76);
+    }
+    /* 자식 결합자 */
+    .green > span {
+      font-size: 50px;
+    }
+    /* 자손 결합자 */
+    .green li {
+      color : blue
+    }
+    /* 속성 선택자 */
+    [class^="y"] {
+      color: rgb(193, 17, 228);
+    }
+
+    [class^="g"] {
+      color: rgb(14, 105, 6);
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="green">Heading</h1>
+  <h2>선택자</h2>
+  <h3>연습</h3>
+  <h4>반가워요</h4>
+  <p id="purple">과목 목록</p>
+  <ul class="green">
+    <li>파이썬</li>
+    <li>알고리즘</li>
+    <li>웹
+      <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>PYTHON</li>
+      </ol>
+    </li>
+  </ul>
+  <p class="green">Lorem, <span>ipsum</span> dolor.</p>
+  <p class="yellow">TEST</p>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      height: 1500px;
+    }
+
+    .sticky {
+      position: sticky;
+      top: 0;  /* 스크롤이 top:0 지점에 도달하면 화면 상단에 고정 */
+      background-color: lightblue;
+      padding: 20px;
+      border: 2px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Sticky positioning</h1>
+  <div>
+    <div class="sticky">첫 번째 Sticky</div>
+    <div>
+      <p>내용1</p>
+      <p>내용2</p>
+      <p>내용3</p>
+    </div>
+    <div class="sticky">두 번째 Sticky</div>
+    <div>
+      <p>내용4</p>
+      <p>내용5</p>
+      <p>내용6</p>
+    </div>
+    <div class="sticky">세 번째 Sticky</div>
+    <div>
+      <p>내용7</p>
+      <p>내용8</p>
+      <p>내용9</p>
+    </div>
+  </div>
+</body>
+
+</html>
+
+
+<!-- 작동 원리
+ 
+ 스크롤 전 → sticky 박스는 원래 자기 자리에서 relative처럼 보임.
+
+스크롤 후(top:0에 닿음) → 화면 상단에 붙어서 fixed처럼 고정됨.
+
+다음 sticky가 나오면 → 이전 sticky는 제자리로 돌아가고, 새로운 sticky가 화면 상단에 고정됨.
+
+-->
