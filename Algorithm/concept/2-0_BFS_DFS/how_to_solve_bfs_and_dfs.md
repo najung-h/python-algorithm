@@ -90,6 +90,34 @@ def dfs(x, visited, path):
 
 ```
 
+<예시 그래프>
+
+```txt
+1
+├─ 2
+└─ 3
+```
+
+
+
+< DFS 호출 트리 (재귀 탐색 흐름) >
+
+```lua
+dfs(1)   visited={1}, path=[1]
+│
+├── dfs(2)   visited={1,2}, path=[1,2]
+│     └─ (더 이상 갈 곳 없음 → 백트래킹)
+│         visited={1}, path=[1]
+│
+└── dfs(3)   visited={1,3}, path=[1,3]
+      └─ (더 이상 갈 곳 없음 → 백트래킹)
+          visited={1}, path=[1]
+
+(마지막으로 1도 백트래킹 → visited={}, path=[])
+```
+
+
+
 ------
 
 ### C. visited 관리 구현체
