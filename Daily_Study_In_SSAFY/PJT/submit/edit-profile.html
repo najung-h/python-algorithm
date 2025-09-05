@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기본 정보 수정</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="profile.css">
+</head>
+
+
+<body>
+  <!-- 네비게이션 바 -->
+  <nav class="navbar mb-4">
+    <form class="container-fluid justify-content-center">
+      <a href="edit-profile.html" class="btn bg-tiny-patrick me-2" type="button">기본 정보 수정</a>
+      <a href="edit-portfolio.html" class="btn bg-patrick me-2" type="button">포트폴리오 수정</a>
+    </form>
+  </nav>
+
+  <!-- 기본 정보 수정 헤더 -->
+  <header>
+    <h1 class="text-center">기본 정보 수정</h1>
+  </header>
+
+  <div class="container feature-01">
+    <div class="row">
+      <!-- 프로필 사진과 자기 소개를 포함한 왼쪽 컨테이너 -->
+      <div class="left-container mx-auto col-md-6 col-12">
+
+        <!-- 프로필 사진 컨테이너 -->
+        <div class="profile-container">
+          <div class="element-title text-center m-3">
+            <span class="bold">프로필 사진</span>
+          </div>
+          <div class="element image">
+            <img src="https://picsum.photos/200" class="rounded-circle mx-auto d-block shadow mb-5" alt="profile-image">
+          </div>
+        </div>
+
+        <!--  자기소개 컨테이너-->
+        <div class="introduing-container">
+          <div class="element-title text-center m-3">
+            <span>자기 소개</span>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="소개를 입력하세요" aria-label="소개"
+              aria-describedby="button-addon2">
+            <button class="btn bg-patrick " type="button" id="button-addon2">Update</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 투자 스타일 등 오른쪽 컨테이너 -->
+      <div class="right-container col-md-6 col-12 align-self-center">
+        <!-- 성향 - 선호도 컨테이너 -->
+        <div class="preference-container justify-contents-center row m-2">
+          <div class="element-title text-center m-3">
+            <span>투자상품 선호도</span>
+          </div>
+          <!-- 체크박스 버튼 -->
+          <div class="boxes d-flex justify-contents-space-between">
+            <!-- 버튼 1-->
+            <div class="btn1  mx-auto">
+              <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+              <span class="element-content me-2">주식</span>
+            </div>
+            <!-- 버튼 2-->
+            <div class="btn2 mx-auto">
+              <input class="form-check-input mx-auto" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+              <span class="element-content me-2">채권</span>
+            </div>
+            <!-- 버튼 3-->
+            <div class="btn3 mx-auto">
+              <input class="form-check-input mx-auto" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+              <span class="element-content me-2">부동산</span>
+            </div>
+            <!-- 버튼 4-->
+            <div class="btn4 mx-auto">
+              <input class="form-check-input mx-auto" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+              <span class="element-content me-2">가상화폐</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 성향 - 투자 스타일 -->
+        <div class="risk-preference-container justify-contents-center row m-2">
+          <div class="element-title text-center m-3">
+            <span>투자 스타일</span>
+          </div>
+          <!-- 라디오 토글 버튼 -->
+          <div class="boxes d-flex justify-contents-space-between ">
+            <!-- 라디오 버튼 1 -->
+            <div class="radio-btn1  mx-auto">
+              <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1" value=""
+                aria-label="...">
+              <strong class="element-content me-2 text-success">안정적</strong>
+            </div>
+            <!-- 라디오 버튼 2 -->
+            <div class="radio-btn2  mx-auto">
+              <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1" value=""
+                aria-label="...">
+              <strong class="element-content me-2 text-primary">중립적</strong>
+            </div>
+            <!-- 라디오 버튼 3 -->
+            <div class="radio-btn3  mx-auto">
+              <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1" value=""
+                aria-label="...">
+              <strong class="element-content me-2 text-danger">공격적</strong>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- 성향 - 관심 종목 컨테이너 -->
+        <div class="intersting-container justify-contents-center row m-2">
+          <div class="element-title text-center m-3">
+            <span>관심 종목</span>
+          </div>
+
+          <!-- 관심 - 체크박스 버튼 -->
+          <div class="boxes d-flex justify-contents-space-between">
+            <!-- 버튼 1-->
+            <div class="intersting-btn1  mx-auto">
+              <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+              <span class="element-content me-2">정보기술</span>
+            </div>
+            <!-- 버튼 2-->
+            <div class="interesting-btn2 mx-auto">
+              <input class="form-check-input mx-auto" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+              <span class="element-content me-2">소비재</span>
+            </div>
+            <!-- 버튼 3-->
+            <div class="intersting-btn3 mx-auto">
+              <input class="form-check-input mx-auto" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+              <span class="element-content me-2">금융</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기본 정보 수정 회원정보 입력 -->
+  <div class="container feature-02">
+
+    <!-- 회원번호 -->
+    <div class="user-id m-2">
+      <div class="input-title m-1">
+        <span>회원번호</span>
+      </div>
+      <span class="input-group-text bg-body-secondary rounded">1</span>
+    </div>
+
+    <!-- ID -->
+    <div class="login-id m-2">
+      <div class="input-title m-1">
+        <span>ID</span>
+      </div>
+      <div class="bg-body-secondary rounded">
+        <span class="input-group-text bg-body-secondary rounded">김싸피</span>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="email m-2">
+      <div class="input-title m-1">
+        <span>Email</span>
+      </div>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="이메일을 설정해주세요" aria-label="email-input"
+          aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon2">@example.com</span>
+        <button class="btn  bg-patrick " type="button" id="basic-addon2">Update</button>
+      </div>
+    </div>
+
+    <!-- Nickname -->
+    <div class="nickname-container m-2">
+      <div class="input-title m-1">
+        <span>Nickname</span>
+      </div>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="닉네임을 설정해주세요" aria-label="닉네임"
+          aria-describedby="button-addon2">
+        <button class="btn bg-patrick" type="button" id="button-addon2">Update</button>
+      </div>
+    </div>
+
+    <!-- 나이 -->
+    <div class="age-container m-2">
+      <div class="input-title m-1">
+        <span>나이</span>
+      </div>
+      <div class="input-group mb-3">
+        <input type="number" class="form-control is-valid" placeholder="나이를 설정해주세요" aria-label="나이"
+          aria-describedby="button-addon2">
+        <button class="btn bg-patrick " type="button" id="button-addon2">Update</button>
+      </div>
+    </div>
+
+    <!-- 자산과 연봉 -->
+    <div class="asset-container m-2">
+
+      <div class="input-title m-1">
+        <span>자산과 연봉</span>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input type="number" class="form-control is-valid" aria-label="Amount (to the nearest dollar)"
+              placeholder="현재 자산을 입력해주세요">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input type="number" class="form-control  is-valid" aria-label="Amount (to the nearest dollar)"
+              placeholder="연봉을 입력해주세요">
+            <button class="btn bg-patrick" type="button" id="button-addon2">Update</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

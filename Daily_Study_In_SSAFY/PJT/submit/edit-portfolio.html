@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+
+<body>
+  <!-- 네비게이션 바 -->
+  <nav class="navbar mb-4">
+    <form class="container-fluid justify-content-center">
+      <a href="edit-profile.html" class="btn bg-patrick me-2" type="button">기본 정보 수정</a>
+      <a href="edit-portfolio.html" class="btn bg-tiny-patrick me-2" type="button">포트폴리오 수정</a>
+    </form>
+  </nav>
+
+  <div class="container d-flex p-2 m-3 ">
+
+
+    <div class="row">
+      <!-- 제목 -->
+      <div class="text-center">
+        <h3 class="h3 fw-normal">
+          <strong>포트폴리오 수정
+        </h3></strong>
+      </div>
+
+
+      <!-- 회원 번호 시작 -->
+      <div class="col-12 mt-1">
+        회원 번호
+      </div>
+      <div class="col-12">
+        <input class="form-control" id="disabledInput" type="text" placeholder="1440000" disabled>
+      </div>
+
+      <!-- ID 시작 -->
+      <div class="col-12 mt-3">
+        ID
+      </div>
+      <div class="col-12">
+        <input class="form-control" id="disabledInput" type="text" placeholder="김싸피피피" disabled>
+      </div>
+
+      <!-- 저축 성향 시작 -->
+      <div class="col-12 mt-3">
+        저축 성향
+      </div>
+
+      <!-- 라디오 버튼 3개랑 업데이트 -->
+      <div class="row p-0">
+        <!-- 라디오 버튼 3개 -->
+        <div class="container d-flex justify-content-left col-8 ">
+          <span class="form-check d-inline-block me-3"> <!--form-chem /  display inline block / margin end-->
+            <input class="form-check-input btn-patrick" type="radio" name="radioDefault" id="radioDefault1">
+            <label class="form-check-label" for="radioDefault1">
+              도전형
+            </label>
+          </span>
+          <span class="form-check d-inline-block me-3">
+            <input class="form-check-input btn-patrick" type="radio" name="radioDefault" id="radioDefault2" checked>
+            <label class="form-check-label" for="radioDefault2">
+              검소형
+            </label>
+          </span>
+          <span class="form-check d-inline-block me-3">
+            <input class="form-check-input btn-patrick" type="radio" name="radioDefault" id="radioDefault3" checked>
+            <label class="form-check-label" for="radioDefault3">
+              알뜰형
+            </label>
+          </span>
+        </div>
+
+
+        <div class="col-3 justify-content-end d-flex p-0">
+          <button type="submit" class="btn bg-patrick align-items-end">Update</button>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- 최애 은행 시작 -->
+      <row>
+        <div class="col-12">
+          최애은행
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="가장 좋아하는 은행을 입력해주세요" aria-label="Recipient’s username"
+            aria-describedby="button-addon2">
+          <button class="btn bg-patrick" type="submit">Update</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

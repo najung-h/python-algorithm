@@ -1,0 +1,33 @@
+body {
+  border: 1px solid gray;
+  margin: 10px 50px;
+  padding: 20px;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+.element-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.elemnet-content {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.bg-patrick {
+  background-color: #FFC0CB;
+}
+
+.bg-tiny-patrick {
+  background-color: #f9d8de;
+}
+
+input[type="radio"]:checked {
+  background-color: #FFC0CB;
+  border-color: #f9d8de;
+}
