@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>금융 상품 비교 앱 · 기본 정보 & 포트폴리오 수정 (F01)</title>
+  <style>
+    :root{
+      --bg:#0f172a;           /* slate-900 */
+      --panel:#111827cc;      /* semitransparent */
+      --muted:#94a3b8;        /* slate-400 */
+      --text:#e5e7eb;         /* zinc-200 */
+      --brand:#22d3ee;        /* cyan-400 */
+      --accent:#a78bfa;       /* violet-400 */
+      --ok:#34d399;           /* green-400 */
+      --warn:#f59e0b;         /* amber-500 */
+      --err:#f87171;          /* red-400 */
+      --card:#0b1226;         /* deep */
+      --shadow:0 12px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:radial-gradient(1200px 600px at 80% -20%,#1e293b 0%,#0f172a 50%,#0b1020 100%);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,Pretendard,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1080px;margin:0 auto;padding:24px}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:30;background:rgba(15,23,42,.6);backdrop-filter:blur(8px);border-bottom:1px solid #1f2937}
+    .nav-wrap{display:flex;align-items:center;gap:16px;height:60px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo{width:28px;height:28px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent));box-shadow:0 6px 16px rgba(34,211,238,.45)}
+    .nav-links{display:flex;gap:8px;margin-left:auto}
+    .tab{padding:10px 14px;border-radius:12px;border:1px solid #1f2937;background:#0b1226;transition:.2s}
+    .tab:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.35)}
+    .tab.active{background:linear-gradient(135deg,#0b1226,#0f172a);border-color:#223047}
+
+    /* LAYOUT */
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){
+      .grid.two{grid-template-columns:1.15fr .85fr}
+    }
+    .card{background:var(--panel);border:1px solid #1f2937;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card h2{margin:0 0 8px;font-size:18px;letter-spacing:.2px}
+    .card .sub{color:var(--muted);font-size:12px;margin-bottom:16px}
+    .card-body{padding:18px}
+    .row{display:grid;gap:12px}
+
+    /* PROFILE */
+    .profile-wrap{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
+    .pfp-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+    .pfp{width:110px;height:110px;border-radius:999px;object-fit:cover;box-shadow:0 16px 40px rgba(0,0,0,.45),0 0 0 4px rgba(167,139,250,.25);}
+    .pfp.squircle{border-radius:40% 60% 55% 45%/55% 45% 55% 45%} /* fun variant */
+    .pfp-edit{position:absolute;bottom:-6px;right:-6px}
+    .btn{appearance:none;border:none;cursor:pointer;padding:10px 14px;border-radius:12px;color:var(--text);background:linear-gradient(135deg,#111827,#0b1226);border:1px solid #1f2937;transition:.2s}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(0,0,0,.35)}
+    .btn.brand{background:linear-gradient(135deg,var(--brand),var(--accent));color:#0b1226;font-weight:700}
+    .btn.ghost{background:transparent}
+
+    textarea{width:100%;min-height:110px;border-radius:14px;background:#0b1226;color:var(--text);border:1px solid #223047;padding:12px;resize:vertical}
+
+    /* FORMS */
+    .form-grid{display:grid;gap:12px}
+    .group{padding:14px;border:1px dashed #223047;border-radius:14px;background:#0b1226}
+    .group h3{margin:0 0 8px;font-size:15px}
+    .options{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #223047;border-radius:999px;background:#0c152b;cursor:pointer}
+    .chip input{accent-color:var(--accent)}
+
+    label.input{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+    input[type="text"],input[type="number"],select{width:100%;background:#0b1226;border:1px solid #223047;border-radius:12px;color:var(--text);padding:10px}
+    input[type="range"]{width:100%}
+
+    .bar{height:10px;border-radius:999px;background:#0b1226;border:1px solid #223047;overflow:hidden}
+    .bar > span{display:block;height:100%}
+
+    .flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .right{margin-left:auto}
+
+    /* TOAST */
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#0b1226;border:1px solid #223047;padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.2s}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(-2px)}
+
+    /* SECTIONS */
+    section{scroll-margin-top:84px}
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand"><span class="logo"></span> 금융 상품 비교 · 설정</div>
+      <div class="nav-links">
+        <a class="tab active" href="#profile" data-tab>기본 정보</a>
+        <a class="tab" href="#portfolio" data-tab>포트폴리오</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- PROFILE & RISK (F01) -->
+    <section id="profile" class="grid two">
+      <article class="card">
+        <div class="card-body">
+          <h2>프로필 & 자기소개</h2>
+          <p class="sub">요구사항: 프로필 사진은 <strong>원/타원</strong>으로, <strong>그림자</strong> 적용. 사진 하단에 자기소개 입력 영역 구성.</p>
+
+          <div class="profile-wrap">
+            <div class="pfp-wrap">
+              <img id="pfp" class="pfp" alt="프로필 사진" src="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%2322d3ee'/><stop offset='100%' stop-color='%23a78bfa'/></linearGradient></defs><circle cx='110' cy='110' r='105' fill='url(%23g)'/><text x='50%' y='52%' dominant-baseline='middle' text-anchor='middle' font-size='74' font-family='Segoe UI, Roboto, sans-serif' fill='%230b1226'>🙂</text></svg>" />
+              <div class="pfp-edit">
+                <label class="btn" for="pfpInput">사진 변경</label>
+                <input id="pfpInput" type="file" accept="image/*" hidden />
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="input">
+                <span>자기소개</span>
+                <textarea id="bio" placeholder="간단한 소개를 입력하세요."></textarea>
+              </label>
+              <div class="flex">
+                <button class="btn brand" id="saveProfile">프로필 저장</button>
+                <button class="btn ghost" id="toggleShape">모양 전환 (원 ↔ 타원)</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-body">
+          <h2>투자 성향</h2>
+          <p class="sub">요구사항: 프로필의 <strong>우측</strong>에 배치, 선택지 자유 구성. 복수선택 / 단일선택 예시 포함.</p>
+
+          <div class="form-grid">
+            <!-- A. 투자 상품 선호도 (복수 선택) -->
+            <div class="group">
+              <h3>A. 투자 상품 선호도 <span class="muted">(복수 선택)</span></h3>
+              <div class="options" id="prefProducts">
+                <!-- 체크박스 집합 -->
+                <label class="chip"><input type="checkbox" value="주식"/> 주식</label>
+                <label class="chip"><input type="checkbox" value="ETF"/> ETF</label>
+                <label class="chip"><input type="checkbox" value="채권"/> 채권</label>
+                <label class="chip"><input type="checkbox" value="펀드"/> 펀드</label>
+                <label class="chip"><input type="checkbox" value="대체투자"/> 대체투자</label>
+                <label class="chip"><input type="checkbox" value="현금/예금"/> 현금·예금</label>
+              </div>
+            </div>
+
+            <!-- B. 투자 스타일 (단일 선택) -->
+            <div class="group">
+              <h3>B. 투자 스타일 <span class="muted">(단일 선택)</span></h3>
+              <div class="options" id="styleRadios">
+                <label class="chip"><input type="radio" name="style" value="안정형"/> 안정형</label>
+                <label class="chip"><input type="radio" name="style" value="중립형"/> 중립형</label>
+                <label class="chip"><input type="radio" name="style" value="성장형"/> 성장형</label>
+                <label class="chip"><input type="radio" name="style" value="공격투자형"/> 공격투자형</label>
+              </div>
+            </div>
+
+            <!-- C. 관심 종목 (복수 선택) -->
+            <div class="group">
+              <h3>C. 관심 종목 <span class="muted">(복수 선택)</span></h3>
+              <div class="options" id="watchlist">
+                <label class="chip"><input type="checkbox" value="삼성전자"/> 삼성전자</label>
+                <label class="chip"><input type="checkbox" value="현대차"/> 현대차</label>
+                <label class="chip"><input type="checkbox" value="KOSPI"/> KOSPI</label>
+                <label class="chip"><input type="checkbox" value="S&P500"/> S&amp;P 500</label>
+                <label class="chip"><input type="checkbox" value="나스닥100"/> 나스닥100</label>
+                <label class="chip"><input type="checkbox" value="BTC"/> BTC</label>
+              </div>
+            </div>
+
+            <div class="flex">
+              <button class="btn brand" id="savePref">투자 성향 저장</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- PORTFOLIO EDIT -->
+    <section id="portfolio" class="grid">
+      <article class="card">
+        <div class="card-body">
+          <h2>포트폴리오 수정</h2>
+          <p class="sub">슬라이더/입력값으로 비중을 설정하고, 목표 수익률 등 기본 정보를 수정하세요.</p>
+
+          <div class="grid" style="grid-template-columns:1fr 1fr;gap:16px">
+            <div class="row">
+              <label class="input">주식 (%)<input type="range" min="0" max="100" value="40" id="allocStocks"></label>
+              <label class="input">채권 (%)<input type="range" min="0" max="100" value="40" id="allocBonds"></label>
+              <label class="input">현금 (%)<input type="range" min="0" max="100" value="10" id="allocCash"></label>
+              <label class="input">대체투자 (%)<input type="range" min="0" max="100" value="10" id="allocAlt"></label>
+              <div class="bar"><span id="stackBar" style="width:100%;background:linear-gradient(90deg,var(--brand) 0 40%, var(--accent) 0 80%, var(--ok) 0 90%, var(--warn) 0 100%)"></span></div>
+              <div class="flex"><small class="muted">합계: <b id="allocTotal">100</b>%</small><small class="right muted" id="allocNote"></small></div>
+            </div>
+
+            <div class="row">
+              <label class="input">목표 연 수익률 (%)<input type="number" id="targetReturn" placeholder="예: 7"/></label>
+              <label class="input">리밸런싱 주기
+                <select id="rebalance">
+                  <option value="분기">분기</option>
+                  <option value="반기">반기</option>
+                  <option value="연 1회">연 1회</option>
+                </select>
+              </label>
+              <div class="group">
+                <h3>위험 허용도 <span class="muted">(단일 선택)</span></h3>
+                <div class="options" id="riskRadios">
+                  <label class="chip"><input type="radio" name="risk" value="낮음"/> 낮음</label>
+                  <label class="chip"><input type="radio" name="risk" value="중간"/> 중간</label>
+                  <label class="chip"><input type="radio" name="risk" value="높음"/> 높음</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group" style="margin-top:12px">
+            <h3>보유 종목 편집</h3>
+            <div id="holdings"></div>
+            <div class="flex" style="margin-top:8px">
+              <button class="btn" id="addRow">행 추가</button>
+              <button class="btn ghost" id="clearRows">모두 삭제</button>
+              <button class="btn brand right" id="savePortfolio">포트폴리오 저장</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div id="toast" class="toast">저장되었습니다 ✅</div>
+
+  <script>
+    // ===== Utilities =====
+    const $ = (sel, el=document) => el.querySelector(sel);
+    const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+    const showToast = (msg='저장되었습니다 ✅') => { const t=$('#toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1300); };
+
+    // ===== Nav active state =====
+    function setActiveTab(){
+      const hash = location.hash || '#profile';
+      $$('[data-tab]').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===hash));
+    }
+    window.addEventListener('hashchange', setActiveTab);
+
+    // ===== Profile photo upload & shape toggle =====
+    $('#pfpInput').addEventListener('change', (e)=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = () => { $('#pfp').src = reader.result; localStorage.setItem('pfp', reader.result); };
+      reader.readAsDataURL(file);
+    });
+    $('#toggleShape').addEventListener('click', ()=>{
+      $('#pfp').classList.toggle('squircle');
+      localStorage.setItem('pfpShape', $('#pfp').classList.contains('squircle') ? 'squircle' : 'round');
+    });
+
+    // ===== Save profile/bio =====
+    $('#saveProfile').addEventListener('click', ()=>{
+      localStorage.setItem('bio', $('#bio').value.trim());
+      showToast();
+    });
+
+    // ===== Save preferences =====
+    $('#savePref').addEventListener('click', ()=>{
+      const products = $$('#prefProducts input:checked').map(i=>i.value);
+      const style = $('#styleRadios input:checked')?.value || '';
+      const watch = $$('#watchlist input:checked').map(i=>i.value);
+      localStorage.setItem('prefProducts', JSON.stringify(products));
+      localStorage.setItem('style', style);
+      localStorage.setItem('watch', JSON.stringify(watch));
+      showToast();
+    });
+
+    // ===== Portfolio: allocations =====
+    const ranges = ['allocStocks','allocBonds','allocCash','allocAlt'].map(id=>$('#'+id));
+    const stackBar = $('#stackBar');
+    function renderStack(){
+      const [s,b,c,a] = ranges.map(r=>+r.value);
+      const total = s+b+c+a; $('#allocTotal').textContent = total;
+      const warn = total!==100; $('#allocNote').textContent = warn ? '합계가 100%가 되도록 조정하세요' : '';
+      stackBar.style.background = `linear-gradient(90deg, var(--brand) 0 ${s}%, var(--accent) 0 ${s+b}%, var(--ok) 0 ${s+b+c}%, var(--warn) 0 100%)`;
+      stackBar.style.width = Math.min(total,100)+'%';
+    }
+    ranges.forEach(r=>r.addEventListener('input', renderStack));
+
+    // ===== Holdings table (plain mini editor) =====
+    function row(ticker='', amount=''){
+      const wrap = document.createElement('div');
+      wrap.className='flex';
+      wrap.style.marginTop='8px';
+      wrap.innerHTML = `
+        <label class="input" style="min-width:180px;flex:1">
+          <span>Ticker/종목</span>
+          <input type="text" value="${ticker}" placeholder="예: 005930 / AAPL"/>
+        </label>
+        <label class="input" style="min-width:160px;width:200px">
+          <span>수량</span>
+          <input type="number" value="${amount}" placeholder="예: 10"/>
+        </label>
+        <button class="btn ghost" title="삭제">삭제</button>`;
+      wrap.querySelector('button').addEventListener('click',()=>wrap.remove());
+      return wrap;
+    }
+    function loadRows(){
+      const box = $('#holdings'); box.innerHTML='';
+      const rows = JSON.parse(localStorage.getItem('holdings')||'[]');
+      if(rows.length===0){ box.appendChild(row()); box.appendChild(row()); }
+      else rows.forEach(r=>box.appendChild(row(r.ticker,r.amount)));
+    }
+    $('#addRow').addEventListener('click',()=> $('#holdings').appendChild(row()));
+    $('#clearRows').addEventListener('click',()=> { $('#holdings').innerHTML=''; localStorage.removeItem('holdings'); loadRows(); });
+
+    // ===== Save portfolio =====
+    $('#savePortfolio').addEventListener('click', ()=>{
+      const alloc = Object.fromEntries(['stocks','bonds','cash','alt'].map((k,i)=>[k, +ranges[i].value]));
+      const risk = $('#riskRadios input:checked')?.value || '';
+      const target = +($('#targetReturn').value || 0);
+      const reb = $('#rebalance').value;
+      const rows = $$('#holdings > div').map(div=>({
+        ticker: $('input[type="text"]',div).value.trim(),
+        amount: +($('input[type="number"]',div).value||0)
+      })).filter(r=>r.ticker);
+      localStorage.setItem('alloc', JSON.stringify(alloc));
+      localStorage.setItem('risk', risk);
+      localStorage.setItem('target', String(target));
+      localStorage.setItem('rebalance', reb);
+      localStorage.setItem('holdings', JSON.stringify(rows));
+      showToast();
+    });
+
+    // ===== Hydrate from localStorage =====
+    function hydrate(){
+      setActiveTab();
+      // profile
+      const bio = localStorage.getItem('bio'); if(bio) $('#bio').value = bio;
+      const pfp = localStorage.getItem('pfp'); if(pfp) $('#pfp').src = pfp;
+      const shape = localStorage.getItem('pfpShape'); if(shape==='squircle') $('#pfp').classList.add('squircle');
+      // prefs
+      const prod = JSON.parse(localStorage.getItem('prefProducts')||'[]');
+      $$('#prefProducts input').forEach(i=> i.checked = prod.includes(i.value));
+      const style = localStorage.getItem('style'); if(style) {
+        const el = Array.from($$('#styleRadios input')).find(i=>i.value===style); if(el) el.checked=true;
+      }
+      const watch = JSON.parse(localStorage.getItem('watch')||'[]');
+      $$('#watchlist input').forEach(i=> i.checked = watch.includes(i.value));
+      // portfolio
+      const alloc = JSON.parse(localStorage.getItem('alloc')||'{}');
+      if(alloc.stocks!=null) $('#allocStocks').value = alloc.stocks;
+      if(alloc.bonds!=null)  $('#allocBonds').value  = alloc.bonds;
+      if(alloc.cash!=null)   $('#allocCash').value   = alloc.cash;
+      if(alloc.alt!=null)    $('#allocAlt').value    = alloc.alt;
+      renderStack();
+      const risk = localStorage.getItem('risk'); if(risk){ const el = Array.from($$('#riskRadios input')).find(i=>i.value===risk); if(el) el.checked=true; }
+      const tgt = localStorage.getItem('target'); if(tgt) $('#targetReturn').value = +tgt;
+      const reb = localStorage.getItem('rebalance'); if(reb) $('#rebalance').value = reb;
+      loadRows();
+    }
+
+    hydrate();
+  </script>
+</body>
+</html>
