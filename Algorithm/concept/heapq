@@ -1,0 +1,14 @@
+heapq는 우선순위를 큐를 구현하기 위한 하나의 방법
+
+```python
+import heapq
+
+pq = []
+heapq.heappush(pq, 5)   # 5 넣기
+heapq.heappush(pq, 2)   # 2 넣기
+heapq.heappush(pq, 8)   # 8 넣기
+heapq.heappush(pq, 1)   # 1 넣기
+
+print(heapq.heappop(pq))  # 1 (가장 작은 값이 나옴)
+print(heapq.heappop(pq))  # 2
+```
