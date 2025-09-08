@@ -46,6 +46,44 @@ from itertools import combinations
 from itertools import combinations_with_replacement
 from itertools import product
 
+
+# 2번 함수 : 수익 계산
+def calc_max_profit(lst):
+    '''최대 수익 수해보기'''
+
+    # 선택하지 않아도 되는 경우
+    if sum(lst) <= C:
+        profit = sum([ele**2 for ele in lst])
+        return profit
+        
+    # 선택해야 하는 경우 - 부분집합 연산    
+    M = len(lst) # 구간 길이
+    
+    max_profit = 0    # 최대 가능 수익 초기화
+    
+    # 부분집합 비트 연산
+    for sett in range(1, 1<<M):  # 공집합 제외
+        # set은 이진수 표현으로다가 선택한 칸을 1로 표현
+        total_honey = 0  # 꿀 총량
+        total_profit = 0 # 수익 총량, 제곱합
+        
+        # 각 칸이 1이라면 해당 칸 선택해서 계산
+        for i in range(M):
+            if sett & (1 << i):
+                total_honey += lst[i]
+                total_profit += (lst[i])**2
+
+        # 다 더했을 때 C 이내라면, 
+        if total_honey <= C:
+            # 갱신 가능하면 갱신
+            if total_profit > max_profit:
+                max_profit = total_profit
+    return max_profit
+                
+                
+    
+
+
 def special_combinations():
     '''한 행에서 두 번 채취를 하는 경우의 수를 구해주는 함수입니다.
     예외처리는 미리 해두고 진입할거기 때문에 별도 예외처리 없습니다.'''
@@ -62,7 +100,8 @@ def special_combinations():
 def honey_combination():
     '''각 행에 대해 시작점을 다르게 가져갈 수 있음
     뒤로 n개 이상의 벌통을 선택하는 시작점을 리턴하자.'''
-    combi_result = []
+    combi_result_1 = []
+    combi_result
 
     # 같은 행에서 두 개 이상을 고를 수 없다면.
     # 행 인덱스는 중복 조합으로
@@ -70,18 +109,12 @@ def honey_combination():
     # 합치면 됨.
     if M*2 > N:
         # 두 개의 행을 고르고, 그 안에서 조합을 선택하는 경우
-        rows = list(combinations(range(3), 2))
-        for combi in product(rows, range(N)):
-            combi_result.append(combi)
-        print('행 두 개 마다 열 하나씩 고르는 경우')
-        print(combi_result)
-
-        '''
-        temp = []
+        rows = list(combinations(range(N), 2))
+        
         for row in rows:
-            for col in range(N-1):
-                temp.append((row,col))
-        return [combinations(temp, 2)]'''
+            for col in range(N-M):
+                combi_result_1.append((row, col))
+        return [combinations(temp, 2)]
 
     # 같은 줄에 경우의 수가 두 개 밖에 없는 경우, 딱 들어맞으니까 그냥 단순하게 계산해주기.
     elif M*2 == N:
@@ -125,17 +158,10 @@ for tc in range(1, T+1):
     N, M, C = map(int, input().split())
     big_arr = tuple(tuple(map(int, input().split())) for _ in range(N))
 
-    combi_result = []
-    if M*2 > N:
-        # 두 개의 행을 고르고, 그 안에서 조합을 선택하는 경우
-        cases = list(combinations(range(N), 2))
-        
-        for rows in cases:
-            for row in rows:
-                print(row)
+    combi_result = honey_combination()
+    
+    ans = calculate_all_combi()
 
 
 
-
-
-    print(f'#{tc} ')
+    print(f'#{tc} {ans}')
